@@ -13,7 +13,7 @@ model can understand better, presumably some integer representation for each and
 every word. For this we require a unique one to one mapping from a word to a
 number. One idea is to use a large array of numbers mapped to each and every
 unique occurrence of a word in the data set. But, this is a major overhead and time
-consuming. It would also be aected by the quality of the data. We must try to make
+consuming. It would also be affected by the quality of the data. We must try to make
 this process as independent of the data set as possible. For this, we use InferSent by
 Facebook for text encoding.
 
@@ -36,7 +36,7 @@ are dierentiable, we also get a gradient we can use to steer both networks to t
 right direction. Typically, the generator is of main interest the discriminator is an
 adaptive loss function that gets discarded once the generator has been trained.
 
-The generation of high-resolution images is dicult because higher resolution
+The generation of high-resolution images is diffcult because higher resolution
 makes it easier to tell the generated images apart from training images, thus drastically amplifying the gradient problem. Large resolutions also necessitate using smaller
 mini batches due to memory constraints, further compromising training stability. The
 key insight is that we can grow both the generator and discriminator progressively,
