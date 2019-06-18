@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <title>Facial Composite Synthesis</title>
+
+    <style>
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 3%;
+  height: 30px;
+  background-color: #21d1b9;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+    <div class="container">
+      <h1>Form Composite Synthesis: input</h1>
+      <p>The input field takes the description of the face you want to create.</p>
+      <form method="POST" onsubmit="move()">
+        <div class="form-group">
+          <label for="des">Description of the face :</label>
+          <input type="textarea" class="form-control" id="des" name="des" value="{{request.form.des}}" required />
+        </div>
+          <div>
+              <button type="submit" class="btn btn-primary" >Generate Facial Composite</button>
+          </div>
+          <br \>
+          <div id="myProgress">
+            <div id="myBar">0%</div>
+          </div>
+      </form>
+    </div>
+
+
+    {% block content %}
+    {% if result_img %}
+    <div id="resultspace" class="container" style="display: block;">
+        <h2>Result</h2>
+        <img src="{{result_img}}" alt="{{result_caption}}" style="display: block;
+                                                                  margin-left: auto;
+                                                                  margin-right: auto;
+                                                                  ">
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    <script>
+    function move() {
+      var elem = document.getElementById("myBar");
+      var width = 0;
+      var id = setInterval(frame, Math.floor(Math.random() * (50 - 30)) + 30);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + '%';
+          elem.innerHTML = width * 1  + '%';
+        }
+        if (width == 10){
+            document.getElementById('myBar').innerHTML = 'Loading the model into memory';
+        }
+        else if (width == 40){
+            document.getElementById('myBar').innerHTML = 'Converting text to embeddings';
+        }
+        else if (width == 50){
+            document.getElementById('myBar').innerHTML = 'Transforming embeddings with Conditional Augmenter';
+        }
+        else if (width == 55){
+            document.getElementById('myBar').innerHTML = 'Progressive GAN input received';
+        }
+        else if (width == 60){
+            document.getElementById('myBar').innerHTML = 'Generating 32x32 pixel faces';
+        }
+        else if (width == 100){
+            document.getElementById('myBar').innerHTML = 'Waiting for Image from the disk';
+
+        }
+      }
+
+    }
+    </script>
+</body>
+</html>
