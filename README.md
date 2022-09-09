@@ -1,4 +1,4 @@
-# Text to Facial Composite
+# Facial Composite Synthesis
 My attempt to train a GAN to generate the facial composites from the description(text or audion input)
 
 ## Facial Composite Synthesis using Deep Learning
